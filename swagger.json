@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Notables API",
+    "version": "v0.0.0"
+  },
+  "host": "msvtzlpo27.execute-api.us-east-1.amazonaws.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/collections": {
+      "get": {
+        "summary": "Collections",
+        "description": "Get a list of all NFT asset collections.",
+        "operationId": "7988d2b4-0edd-414d-a32b-6bd1590a6537",
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/collection": {
+      "post": {
+        "summary": "Create Collection",
+        "description": "Create a new collection.",
+        "operationId": "a793774d-8e6f-4698-9ee0-346f9a3a73fa",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "{\"slug\":\"test\"}"
+            },
+            "in": "body",
+            "name": "body"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        }
+      }
+    },
+    "/collection/test": {
+      "delete": {
+        "summary": "Delete Collection",
+        "description": "Delete a collection given its `slug`.",
+        "operationId": "ad4a1fcc-24a2-4f68-b177-3efe8570c999",
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Users",
+        "description": "Get a list of all registered users.",
+        "operationId": "13dcee3d-0454-4243-ae1e-e50fcd407a5a",
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/users/chance": {
+      "get": {
+        "summary": "Get User",
+        "description": "Get a user given their email address.",
+        "operationId": "d982d7bb-3808-4713-9225-471c9b57c1a3",
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        },
+        "parameters": []
+      },
+      "patch": {
+        "summary": "Update User",
+        "description": "Update a user given their email address.",
+        "operationId": "b0516b54-c2ee-43fe-b159-0897dd5baa26",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "{\"bio\":\"Redhead, philosopher, web developer\"}"
+            },
+            "in": "body",
+            "name": "body"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "no response description was provided for this operation"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

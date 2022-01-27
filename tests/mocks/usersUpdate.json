@@ -1,0 +1,6 @@
+{
+  "pathParameters": {
+    "id": "123456"
+  },
+  "body": "{}"
+}

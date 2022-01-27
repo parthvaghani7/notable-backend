@@ -1,0 +1,22 @@
+{
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "test": "node **/*.spec.js",
+    "test:usersList": "npx sls invoke local -f usersList",
+    "test:usersDescribe": "npx sls invoke local -f usersDescribe --path tests/mocks/usersDescribe.json",
+    "test:usersUpdate": "npx sls invoke local -f usersUpdate --path tests/mocks/usersUpdate.json",
+    "test:collectionsList": "npx sls invoke local -f collectionsList",
+    "test:collectionsCreate": "npx sls invoke local -f collectionsCreate --path tests/mocks/collectionsCreate.json",
+    "test:collectionsDelete": "npx sls invoke local -f collectionsDelete --path tests/mocks/collectionsDelete.json"
+  },
+  "devDependencies": {
+    "serverless": "^2.39.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.895.0",
+    "mime-types": "^2.1.30",
+    "uuid": "^8.3.2"
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "info": {
+    "name": "Notables API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Collections",
+      "item": [
+        {
+          "name": "Collections",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_API_URL}}/collections",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/collections"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Get a list of all NFT asset collections.",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": null,
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        },
+        {
+          "name": "Create Collection",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{BASE_API_URL}}/collection",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/collection"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Create a new collection.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "description": null
+              },
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false,
+              "raw": "{\"slug\":\"test\"}"
+            },
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Collection",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{BASE_API_URL}}/collection/test",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/collection/test"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Delete a collection given its `slug`.",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": null,
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": null,
+      "response": []
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_API_URL}}/users",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/users"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Get a list of all registered users.",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": null,
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_API_URL}}/users/chance",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/users/chance"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Get a user given their email address.",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": null,
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{BASE_API_URL}}/users/chance",
+              "query": null,
+              "protocol": null,
+              "host": [
+                "{{BASE_API_URL}}/users/chance"
+              ],
+              "port": null,
+              "path": null
+            },
+            "description": "Update a user given their email address.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "description": null
+              },
+              {
+                "key": "Authorization",
+                "value": "{{ACCESS_TOKEN}}",
+                "disabled": false,
+                "description": null
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false,
+              "raw": "{\"bio\":\"Redhead, philosopher, web developer\"}"
+            },
+            "auth": null
+          },
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "followOriginalHttpMethod": false,
+            "followAuthorizationHeader": false
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": null,
+      "response": []
+    }
+  ]
+}

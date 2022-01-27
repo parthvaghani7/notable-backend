@@ -1,0 +1,143 @@
+# app and org for use with dashboard.serverless.com
+org: quandefi
+app: notables
+service: notables-api-service
+configValidationMode: error
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  profile: notables-api
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    COGNITO_USER_POOL: "nftmarketplace_${opt:stage, 'dev'}"
+    USER_POOL_ID: "us-east-1_NGznyhSDf"
+    CLIENT_ID: "4h61bse36uh775rqfgh8ke77eg"
+    USER_TABLE: notables-users-${opt:stage, self:provider.stage}
+    COLLECTION_TABLE: notables-collections-${opt:stage, self:provider.stage}
+  httpApi:
+    cors: true
+    authorizers:
+      serviceAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://cognito-idp.${self:provider.region}.amazonaws.com/${self:provider.environment.USER_POOL_ID}
+        audience:
+          - ${self:provider.environment.CLIENT_ID}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "*"
+
+package:
+  patterns:
+    - '!.editorconfig'
+    - '!tests/**'
+    # Ignore API IDLs
+    - '!Notables API.paw'
+    - '!postman.json'
+    - '!swagger.json'
+
+functions:
+  # Users
+  usersSignUp:
+    handler: api/users.signUp
+    events:
+      - cognitoUserPool:
+          pool: ${self:provider.environment.COGNITO_USER_POOL}
+          trigger: PostConfirmation
+          existing: true
+  usersList:
+    handler: api/users.list
+    events:
+      - httpApi:
+          path: /users
+          method: get
+          authorizer:
+            name: serviceAuthorizer
+  usersDescribe:
+    handler: api/users.describe
+    events:
+      - httpApi:
+          path: /users/{email}
+          method: get
+          authorizer:
+            name: serviceAuthorizer
+  usersUpdate:
+    handler: api/users.update
+    events:
+      - httpApi:
+          path: /users/{email}
+          method: patch
+          authorizer:
+            name: serviceAuthorizer
+  # Collections
+  collectionsList:
+    handler: api/collections.list
+    events:
+      - httpApi:
+          path: /collections
+          method: get
+          authorizer:
+            name: serviceAuthorizer
+  collectionsCreate:
+    handler: api/collections.create
+    events:
+      - httpApi:
+          path: /collection
+          method: post
+          authorizer:
+            name: serviceAuthorizer
+  collectionsDelete:
+    handler: api/collections.delete
+    events:
+      - httpApi:
+          path: /collections/{slug}
+          method: delete
+          authorizer:
+            name: serviceAuthorizer
+
+resources:
+  Resources:
+    UsersDynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${self:provider.environment.USER_TABLE}
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    CollectionsDynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${self:provider.environment.COLLECTION_TABLE}
+        AttributeDefinitions:
+          - AttributeName: slug
+            AttributeType: S
+        KeySchema:
+          - AttributeName: slug
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
